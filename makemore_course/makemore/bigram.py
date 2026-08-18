@@ -35,9 +35,14 @@ def count_bigrams(words: Sequence[str], vocab: Vocabulary) -> torch.Tensor:
 
 
 def normalize_counts(counts: torch.Tensor, smoothing: float = 1.0) -> torch.Tensor:
-    """加伪计数后按行归一化。"""
-    # TODO 05
-    raise NotImplementedError("完成任务 05：normalize_counts")
+    t = torch.zeros_like(counts, dtype=torch.float)
+    l = counts.shape[0]
+    for i in range(l):
+        s = counts[i].sum() + l * smoothing
+        for j in range(l):
+            t[i, j] = (counts[i, j] + smoothing) / s
+
+    return t
 
 
 def bigram_nll(probs: torch.Tensor, x: torch.Tensor, y: torch.Tensor) -> torch.Tensor:

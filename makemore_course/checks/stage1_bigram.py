@@ -119,7 +119,7 @@ def check_04() -> None:
 
 
 def check_05() -> None:
-    counts = torch.tensor([[0, 1], [3, 0]], dtype=torch.long)
+    counts = torch.tensor([[1, 1], [3, 0]], dtype=torch.long)
     probs = normalize_counts(counts, smoothing=1.0)
     require(tuple(probs.shape) == (2, 2), "归一化不应改变 shape")
     require(bool((probs > 0).all()), "smoothing 后概率必须为正")

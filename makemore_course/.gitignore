@@ -1,0 +1,6 @@
+__pycache__/
+*.py[cod]
+data/names.txt
+artifacts/*
+!artifacts/.gitkeep
+!artifacts/README.md

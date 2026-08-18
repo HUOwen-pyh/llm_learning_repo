@@ -76,9 +76,14 @@ def build_bigram_pairs(
     words: Sequence[str],
     vocab: Vocabulary,
 ) -> tuple[torch.Tensor, torch.Tensor]:
-    """把每个单词连同首尾边界转换成 bigram x/y。"""
-    # TODO 03
-    raise NotImplementedError("完成任务 03：build_bigram_pairs")
+    x, y = [], []
+    for w in words:
+        indix = [0] + vocab.encode(w) + [0]
+        for i in range(len(indix) - 1):
+            x.append(indix[i])
+            y.append(indix[i+1])
+
+    return (torch.tensor(x, dtype = torch.long), torch.tensor(y, dtype = torch.long))
 
 
 def build_context_dataset(

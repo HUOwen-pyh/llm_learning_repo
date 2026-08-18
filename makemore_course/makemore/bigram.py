@@ -26,9 +26,12 @@ class SmoothingResult:
 
 
 def count_bigrams(words: Sequence[str], vocab: Vocabulary) -> torch.Tensor:
-    """返回 shape=(V,V) 的 torch.long 计数矩阵。"""
-    # TODO 04
-    raise NotImplementedError("完成任务 04：count_bigrams")
+    x, y = build_bigram_pairs(words, vocab)
+    l = len(vocab.stoi)
+    res = torch.zeros(l, l, dtype=torch.long)
+    for i in range(x.shape[0]):
+        res[x[i], y[i]] += 1
+    return res
 
 
 def normalize_counts(counts: torch.Tensor, smoothing: float = 1.0) -> torch.Tensor:

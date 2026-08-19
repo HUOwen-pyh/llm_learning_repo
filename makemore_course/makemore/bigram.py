@@ -46,14 +46,10 @@ def normalize_counts(counts: torch.Tensor, smoothing: float = 1.0) -> torch.Tens
 
 
 def bigram_nll(probs: torch.Tensor, x: torch.Tensor, y: torch.Tensor) -> torch.Tensor:
-    """返回平均负对数似然。"""
-    # TODO 06
-    raise NotImplementedError("完成任务 06：bigram_nll")
-
+    return -torch.log(probs[x,y]).mean()
 
 def perplexity(nll: float | torch.Tensor) -> float:
-    # TODO 06
-    raise NotImplementedError("完成任务 06：perplexity")
+    return nll.exp().item() if isinstance(nll, torch.Tensor) else math.exp(nll)
 
 
 @torch.no_grad()
